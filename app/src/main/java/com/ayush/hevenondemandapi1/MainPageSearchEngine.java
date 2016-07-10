@@ -2,11 +2,13 @@ package com.ayush.hevenondemandapi1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -59,7 +61,7 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
     ArrayList<String> autoCorrect;
     Spinner spinner;
     int controlVariable = 0;
-    int backPressed=0;
+    int backPressed = 0;
     //animatedCircleLoadingView //animatedCircleLoadingView;
 
     ImageButton uploadImage, docImage, advanceSearch, settingsButton;
@@ -96,14 +98,16 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text=searchEditText.getText().toString();
-                if(!text.equals(""))
-                performSearch(text);
+                vibrate();
+                String text = searchEditText.getText().toString();
+                if (!text.equals(""))
+                    performSearch(text);
             }
         });
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrate();
                 Intent intent = new Intent(MainPageSearchEngine.this, ImageToText.class);
                 //animatedCircleLoadingView.setVisibility(View.VISIBLE);
                 //animatedCircleLoadingView.stopFailure();
@@ -117,6 +121,7 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
         docImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibrate();
                 Intent intent = new Intent(MainPageSearchEngine.this, DocTotext.class);
                 startActivityForResult(intent, 2);
                 ///start
@@ -127,6 +132,7 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
             public void onClick(View v) {
 //                Intent intent=new Intent(MainPageSearchEngine.this,MainActivity.class);
 //                startActivityForResult(intent, 2);
+
                 spinner.setVisibility(View.VISIBLE);
 
 
@@ -137,7 +143,7 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
                                               public void onClick(View v) {
 //                Intent intent=new Intent(MainPageSearchEngine.this,SettingPage.class);
 //startActivity(intent);
-
+                                                  vibrate();
                                                   //从menu 中设置数据源
                                                   mSweetSheet.setMenuList(R.menu.menu_settings);
                                                   mSweetSheet.setDelegate(new RecyclerViewDelegate(true));
@@ -172,8 +178,7 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
             try {
                 String[] message = data.getStringArrayExtra("MESSAGE");
                 selectImageOutputType(message);
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
 
             }
             //animatedCircleLoadingView.stopOk();
@@ -463,10 +468,9 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
                     public void onClick(DialogInterface dialog, int id) {
                         //  Your code when user clicked on OK
                         //  You can write the code  to save the selected item here
-                        try{
-                        searchEditText.setText(items[finalValue5]);}
-                        catch (Exception e)
-                        {
+                        try {
+                            searchEditText.setText(items[finalValue5]);
+                        } catch (Exception e) {
                             searchEditText.setText("");
                         }
                     }
@@ -481,15 +485,15 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
 
     @Override
     public void onBackPressed() {
-
+        vibrate();
         if (mSweetSheet.isShow()) {
             if (mSweetSheet.isShow()) {
                 mSweetSheet.dismiss();
             }
 
         } else {
-            if(backPressed==1)
-            super.onBackPressed();
+            if (backPressed == 1)
+                super.onBackPressed();
             else
                 backPressed++;
         }
@@ -737,6 +741,14 @@ public class MainPageSearchEngine extends Activity implements IHODClientCallback
         });
 
 
+    }
+
+    void vibrate() {
+        Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(
+                Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(60);
 
     }
+
+
 }

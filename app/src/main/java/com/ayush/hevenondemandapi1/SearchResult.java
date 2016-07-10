@@ -1,11 +1,13 @@
 package com.ayush.hevenondemandapi1;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
@@ -50,7 +52,7 @@ public class SearchResult extends Activity implements IHODClientCallback {
     String api = "bc7da6ae-8423-49e4-8f41-d7a058d0195b";
     ListView listView;
     HODClient hodClient;
-    int backPressed=0;
+    int backPressed = 0;
 
     HODResponseParser hodParser;
     ArrayList<String> autoCorrectNew;
@@ -109,6 +111,7 @@ public class SearchResult extends Activity implements IHODClientCallback {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                vibrate();
                 Intent i = new Intent(SearchResult.this, MainPageSearchEngine.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_out);
@@ -136,8 +139,9 @@ public class SearchResult extends Activity implements IHODClientCallback {
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text=searchEditText.getText().toString();
-                if(!text.equals("")) {
+                vibrate();
+                String text = searchEditText.getText().toString();
+                if (!text.equals("")) {
 
 
                     animatedCircleLoadingView = (AnimatedCircleLoadingView) findViewById(R.id.circle_loading_view);
@@ -516,6 +520,7 @@ public class SearchResult extends Activity implements IHODClientCallback {
                 @Override
                 public void onItemClick(int position, View v) {
                     Log.i(LOG_TAG, " Clicked on Item " + position);
+                    vibrate();
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url[position]));
                     startActivity(browserIntent);
                 }
@@ -575,16 +580,15 @@ public class SearchResult extends Activity implements IHODClientCallback {
 
 
     }
+
     @Override
     public void onBackPressed() {
-
-            if(backPressed==1)
-                super.onBackPressed();
-            else
-                backPressed++;
-        }
-
-
+        vibrate();
+        if (backPressed == 1)
+            super.onBackPressed();
+        else
+            backPressed++;
+    }
 
 
     private ArrayList<DataObject> getDataSet() {
@@ -596,4 +600,12 @@ public class SearchResult extends Activity implements IHODClientCallback {
 //        }
         return results;
     }
+
+    void vibrate() {
+        Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(
+                Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(60);
+
+    }
+
 }

@@ -32,7 +32,7 @@ import hod.response.parser.HODResponseParser;
 /**
  * Created by user on 7/9/2016.
  */
-public class MainPageImageAnalysis extends Activity{
+public class MainPageImageAnalysis extends Activity {
 //    ImageButton searchView;
 //    AutoCompleteTextView searchEditText;
 //    String api = "bc7da6ae-8423-49e4-8f41-d7a058d0195b";
