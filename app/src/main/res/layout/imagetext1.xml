@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <Button
+        android:text="Gallery"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:id="@+id/button"
+        android:onClick="click"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="104dp"
+         />
+
+    <Button
+        android:text="Camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:onClick="capture"
+        android:layout_below="@+id/button"
+        android:layout_marginBottom="16dp"
+        />
+
+    <ImageView
+        android:src="@color/abc_input_method_navigation_guard"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:scaleType="center" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+
+        android:layout_below="@+id/button2"/>
+</RelativeLayout>

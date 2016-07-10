@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_recyclerView"
+        android:icon="@drawable/pencil"
+        android:orderInCategory="100"
+        android:title="Type"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/counting"
+        android:orderInCategory="100"
+        android:title="Number of Results"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/sorting"
+        android:orderInCategory="100"
+        android:title="Sort"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/notepad"
+        android:orderInCategory="100"
+        android:title="Summary"
+        app:showAsAction="always" />
+
+</menu>
